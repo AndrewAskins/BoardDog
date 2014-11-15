@@ -30,8 +30,8 @@
           templateUrl: 'views/about.html',
           controller: 'AboutCtrl'
         })
-        .when('/client', {
-          templateUrl: 'views/client.html',
+        .when('/addClient', {
+          templateUrl: 'views/addClient.html',
           controller: 'ClientCtrl'
         })
         .otherwise({

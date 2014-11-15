@@ -21,11 +21,11 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container-fluid">
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
+          <li><a ng-href="#/addClient">Client</a></li>
           <li><a ng-href="#">Contact</a></li>
         </ul>
         <h3 class="text-muted">Board Dog</h3>
@@ -33,7 +33,7 @@
 
       <div ng-view=""></div>
 
-      <div class="footer">
+      <div class="footer" style="display: none;">
         <p><span class="glyphicon glyphicon-heart"></span> from the BoardDog team</p>
       </div>
     </div>
@@ -83,6 +83,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/utils/uuid.js"></script>
         <script src="scripts/auth/authCtrl.js"></script>
+        <script src="scripts/clients/clientCtrl.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/client/clientCtrl.js"></script>
