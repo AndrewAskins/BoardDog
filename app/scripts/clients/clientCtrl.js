@@ -24,12 +24,19 @@
 					color: ''
 				};
 
+				//loading in progress!
 				$scope.$watch('clients', function(newValue) {
-					
+					//loading complete!
 				}, true);
 
 				$scope.addClient = function() {
 					$scope.clients.$add($scope.client);
+				};
+
+				$scope.deleteClient = function(client) {
+					if(client != null) {
+						$scope.clients.$remove(client);
+					}
 				};
 			}]);
 })();
