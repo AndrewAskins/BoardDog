@@ -1,8 +1,8 @@
 /**
  * @ngdoc overview
- * @name boardDogApp
+ * @name BoardDog
  * @description
- * # boardDogApp
+ * # BoardDog
  *
  * Main module of the application.
  */
@@ -11,7 +11,7 @@
   'use strict';
 
   angular
-    .module('boardDogApp', [
+    .module('BoardDog', [
       'ngAnimate',
       'ngCookies',
       'ngResource',
@@ -22,8 +22,8 @@
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl'
+          templateUrl: 'views/auth.html',
+          controller: 'AuthCtrl'
         })
         .when('/about', {
           templateUrl: 'views/about.html',

@@ -5,9 +5,9 @@
  * @name boardDogApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the boardDogApp
+ * Controller of the BoardDog
  */
-angular.module('boardDogApp')
+angular.module('BoardDog')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
