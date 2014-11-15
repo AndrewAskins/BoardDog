@@ -10,7 +10,12 @@
 
 	angular.module('BoardDog')
 	  	   .controller('ClientCtrl', ['$scope', '$routeParams', '$firebase', function ($scope, $routeParams, $firebase) {
-				this.client = {
+	  	   		var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/clients');
+	  	   		// create an AngularFire reference to the data
+			    var sync = $firebase(ref);
+			    // download the data into a local object
+			    $scope.clients = sync.$asArray();
+				$scope.client = {
 					id: Utils.uuid(),
 					name: null,
 					email: null,
@@ -20,7 +25,7 @@
 				};
 
 				$scope.addClient = function() {
-					console.log($scope.client);
+					$scope.clients.$add($scope.client);
 				};
 			}]);
 })();
