@@ -9,19 +9,28 @@
 	'use strict';
 
 	angular.module('BoardDog')
-	  	   .controller('AuthCtrl', AuthCtrl);
-
-	AuthCtrl.$inject = ['$scope', '$routeParams', '$filter'];
-
-	function AuthCtrl($scope, $routeParams, $filter) {
-		$scope.surface = {
-			id: null,
-
-		};
-
-		$scope.submit = function() {
-			firebase($scope.surface);
-		}
-	};
+	  	   .controller('SurfaceCtrl', ['$scope', '$routeParams', '$filter', '$firebase', function AuthCtrl($scope, $routeParams, $filter) {
+			  var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/surfaces');
+	  	   		// create an AngularFire reference to the data
+			    var sync = $firebase(ref);
+			    // download the data into a local object
+			    $scope.surfaces = sync.$asArray();
+			    $scope.surface = {
+			  	    id: Utils.uuid(),
+					name: null,
+					location: {
+						latitude: null,
+						longitude: null
+					},
+					popularity: null,
+					price: null,
+					traffic: null,
+					type: null
+			    };
+				
+			    $scope.addSurface = function() {
+				    firebase($scope.surface);
+			    };
+		}]);
 
 })();
