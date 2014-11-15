@@ -14,4 +14,5 @@ angular.module('boardDogApp')
       'AngularJS',
       'Karma'
     ];
+
   });

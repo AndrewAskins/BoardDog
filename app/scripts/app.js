@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name boardDogApp
@@ -8,26 +6,32 @@
  *
  * Main module of the application.
  */
-angular
-  .module('boardDogApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+
+(function(undefined) {
+  'use strict';
+
+  angular
+    .module('boardDogApp', [
+      'ngAnimate',
+      'ngCookies',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch'
+    ])
+    .config(function ($routeProvider) {
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl'
+        })
+        .when('/about', {
+          templateUrl: 'views/about.html',
+          controller: 'AboutCtrl'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
+
+})();
