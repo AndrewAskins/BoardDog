@@ -14,7 +14,7 @@
 	AuthCtrl.$inject = ['$scope', '$routeParams', '$filter'];
 
 	function AuthCtrl($scope, $routeParams, $filter) {
-		
+
 	};
 
 })();
