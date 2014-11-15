@@ -24,6 +24,10 @@
 					color: ''
 				};
 
+				$scope.$watch('clients', function(newValue) {
+					
+				}, true);
+
 				$scope.addClient = function() {
 					$scope.clients.$add($scope.client);
 				};
