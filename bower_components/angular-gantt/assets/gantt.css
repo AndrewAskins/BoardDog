@@ -92,6 +92,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    background: #CCC;
 }
 
 .gantt-body-foreground {
@@ -140,7 +141,7 @@
 }
 
 .gantt-background-row-alt {
-    background-color: #EFEFEF;
+    background-color: #B8B8B8;
 }
 
 .gantt-row {
@@ -163,7 +164,7 @@
     top: 0; bottom: 0;
     min-width: 0.6em;
     height: 80%;
-    background-color: grey;
+    background-color: #CCC;
     border-radius: 2px;
 }
 
@@ -180,7 +181,7 @@
     top: 0; bottom: 0;
     width: 0.6em !important;
     height: 80%;
-    background-color: grey;
+    background-color: #CCC;
     border-radius: 0.3em;
 }
 

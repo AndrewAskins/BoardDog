@@ -4039,9 +4039,9 @@ angular.module('ganttTemplates', []).run(['$templateCache', function($templateCa
         '            <gantt-bounds ng-if="task.bounds !== undefined" ng-model="task"></gantt-bounds>\n' +
         '            <gantt-tooltip ng-if="showTooltips && (task.isMouseOver || task.isMoving)" ng-model="task"></gantt-tooltip>\n' +
         '            <div ng-if="task.truncatedLeft" class="gantt-task-truncated-left"><span>&lt;</span></div>\n' +
+        '            <gantt-task-progress ng-if="task.progress !== undefined" progress="task.progress"></gantt-task-progress>\n' +
         '            <div class="gantt-task-content"><span>{{ (task.isMilestone === true && \'&nbsp;\' || task.name) }}</span></div>\n' +
         '            <div ng-if="task.truncatedRight" class="gantt-task-truncated-right"><span>&gt;</span></div>\n' +
-        '            <gantt-task-progress ng-if="task.progress !== undefined" progress="task.progress"></gantt-task-progress>\n' +
         '        </div>\n' +
         '    </script>\n' +
         '\n' +
@@ -4067,7 +4067,11 @@ angular.module('ganttTemplates', []).run(['$templateCache', function($templateCa
         '\n' +
         '    <!-- Task progress template -->\n' +
         '    <script type="text/ng-template" id="template/default.taskProgress.tmpl.html">\n' +
-        '        <div class=\'gantt-task-progress\' ng-style="getCss()" ng-class="progress.classes"></div>\n' +
+        '        <div class=\'gantt-task-progress\' ng-style="getCss()" ng-class="progress.classes">' +
+        '        	<div class=\'gantt-task-progress-meter\' ng-style="getCss()" ng-class="progress.classes">' +
+        '           	         <span>{{ (task.progress.percent) }}</span>' +
+        '		 	</div>\n' +
+        '		 </div>\n' +
         '    </script>\n' +
         '\n' +
         '    <!-- Row template -->\n' +

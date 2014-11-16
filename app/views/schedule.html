@@ -2,11 +2,11 @@
 <div class="row schedule-filter">
   <div class="col-sm-3">
     <label>Search</label>
-    <input class="form-control" type="text" ng-model="search" />
+    <input class="form-control" type="text" ng-model="options.filterRow" />
   </div>
   <div class="col-sm-3">
     <label>Sort By</label>
-    <select class="form-control"></select>
+    <div selectize="config" options='myOptions' ng-model="options.mode"></div>
   </div>
   <div class="col-sm-2">
     <label>Date Range</label>
@@ -27,7 +27,7 @@
 	  <gantt first-day-of-week="1"
            filter-task="{'name': options.filterTask}"
            filter-row="{'name': options.filterRow}"
-           labels-width="200"
+           column-width="50"
            load-data="loadData = fn"
            load-timespans="loadTimespans = fn"
            center-date="scrollToDate = fn"
@@ -38,14 +38,13 @@
            allow-task-row-switching="!options.readOnly"
            sort-mode="options.mode"
            view-scale="options.scale"
-           column-width="options.width && {minute: 40, hour: 40, day: 40, week: 150, month: 300, quarter: 500, year: 800}[options.scale] || undefined"
+           column-width="options.width"
            auto-expand="options.autoExpand"
            task-out-of-range="options.taskOutOfRange"
            from-date = "options.fromDate"
            to-date = "options.toDate"
            show-labels-column="options.showLabelsColumn"
-           current-date="options.currentDate"
-           current-date-value="options.currentDateValue"
+           labels-width="options.labelsWidth"
            max-height="options.maxHeight && 300 || 0"
            on-scroll="scrollEvent(event)"
            headers-formats="options.headersFormats"
@@ -53,7 +52,8 @@
            time-frames="options.timeFrames"
            date-frames="options.dateFrames"
            time-frames-non-working-mode="options.timeFramesNonWorkingMode"
-           column-magnet="options.columnMagnet">
+           column-magnet="options.columnMagnet"
+           allow-labels-resizing="true">
     </gantt>
   </div>
 </div>

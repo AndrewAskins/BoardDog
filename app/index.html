@@ -5,20 +5,22 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,700,300italic,700italic' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-gantt/assets/gantt.css" />
+    <link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="scripts/third_party/pickadate.js-3.5.3/lib/themes/default.css">
-    <link rel="stylesheet" href="scripts/third_party/pickadate.js-3.5.3/lib/themes/default.date.css">
-    <link rel="stylesheet" href="scripts/third_party/selectize.js-master/dist/css/selectize.bootstrap3.css">
     <link rel="stylesheet" href="styles/site.css">
     <!-- endbuild -->
+    
+    <link rel="stylesheet" href="bower_components/pickadate/lib/themes/default.css" />
+    <link rel="stylesheet" href="bower_components/pickadate/lib/themes/default.date.css" />
   </head>
   <body ng-app="BoardDog">
     <!--[if lt IE 7]>
@@ -81,28 +83,31 @@
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+    <script src="bower_components/sifter/sifter.js"></script>
+    <script src="bower_components/microplugin/src/microplugin.js"></script>
+    <script src="bower_components/selectize/dist/js/selectize.js"></script>
+    <script src="bower_components/pickadate/lib/picker.js"></script>
+    <script src="bower_components/pickadate/lib/picker.date.js"></script>
+    <script src="bower_components/pickadate/lib/picker.time.js"></script>
+    <script src="bower_components/angular-selectize2/dist/selectize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+	<script src="scripts/utils/uuid.js"></script>
+    <!-- Utils/ThirdParty -->
 
-        <!-- Utils/ThirdParty -->
-        <script src="scripts/third_party/pickadate.js-3.5.3/lib/picker.js"></script>
-        <script src="scripts/third_party/pickadate.js-3.5.3/lib/picker.date.js"></script>
-        <script src="scripts/third_party/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
-        <script src="scripts/utils/uuid.js"></script>
-
-        <!-- Controllers -->
-        <script src="scripts/auth/authCtrl.js"></script>
-        <script src="scripts/admin/adminCtrl.js"></script>
-        <script src="scripts/schedule/scheduleCtrl.js"></script>
-        <script src="scripts/clients/clientCtrl.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/surfaces/surfaceCtrl.js"></script>
-        <script src="scripts/tasks/taskCtrl.js"></script>
-        <!-- endbuild -->
+    <!-- Controllers -->
+    <script src="scripts/auth/authCtrl.js"></script>
+    <script src="scripts/admin/adminCtrl.js"></script>
+    <script src="scripts/schedule/scheduleCtrl.js"></script>
+    <script src="scripts/clients/clientCtrl.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/surfaces/surfaceCtrl.js"></script>
+    <script src="scripts/tasks/taskCtrl.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>

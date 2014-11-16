@@ -23,24 +23,39 @@
 				// 	phone_number: null,
 				// 	color: ''
 
+				$scope.myOptions = [
+				  {id: 1, title: 'Name', method: 'name'},
+				  {id: 2, title: 'Earliest Task', method: 'from'},
+				  {id: 3, title: 'Latest Task', method: 'to'}
+				];
+				
+				$scope.config = {
+				  create: true,
+				  valueField: 'method',
+				  labelField: 'title',
+				  delimiter: '|',
+				  placeholder: 'Pick something'
+				}
+				
 				angular.element('.datepicker').pickadate();
 
 				$scope.options = {
 		            mode: 'custom',
 		            scale: 'day',
 		            maxHeight: false,
-		            width: false,
+		            width: '50',
 		            autoExpand: 'none',
 		            taskOutOfRange: 'truncate',
 		            fromDate: undefined,
 		            toDate: undefined,
 		            showLabelsColumn: true,
-		            currentDate: 'line',
-		            currentDateValue : new Date(2013, 9, 23, 11, 20, 0),
+		            currentDate: 'none',
 		            draw: true,
 		            readOnly: false,
 		            filterTask: undefined,
 		            filterRow: undefined,
+		            labelsWidth: '200',
+		            headers: ['month', 'day'],
 		            timeFrames:
 		                 {'day': {
 		                    start: moment('8:00', 'HH:mm'),
@@ -66,7 +81,8 @@
 		                    targets: ['weekend']
 		                }
 		            },
-		            timeFramesNonWorkingMode: 'hidden'
+		            timeFramesNonWorkingMode: 'hidden',
+		            columnMagnet: '12 hours'
 		        };
 				
 				$scope.$on('event:gantt-ready', function() 
@@ -98,8 +114,8 @@
                         	'name': 'Milestones',
                         	'tasks': [
                             // Dates can be specified as string, timestamp or javascript date object. The data attribute can be used to attach a custom object
-                            {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#93C47D', 'from': '2013-10-07T09:00:00', 'to': '2013-10-07T10:00:00'},
-                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#93C47D', 'from': new Date(2013, 9, 18, 18, 0, 0), 'to': new Date(2013, 9, 18, 18, 0, 0), 'est': new Date(2013, 9, 16, 7, 0, 0), 'lct': new Date(2013, 9, 19, 0, 0, 0)},
+                            {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#93C47D', 'from': '2013-10-07T09:00:00', 'to': '2013-10-07T10:00:00', progress: { progress: '75', color: colorForProgress('75') }},
+                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#93C47D', 'from': new Date(2013, 9, 18, 18, 0, 0), 'to': new Date(2013, 9, 20, 29, 0, 0), 'est': new Date(2013, 9, 16, 7, 0, 0), 'lct': new Date(2013, 9, 19, 0, 0, 0), progress: { progress: '40', color: colorForProgress('40') }},
                             {'id': 'b6a1c25c-85ae-4991-8502-b2b5127bc47c', 'name': 'Development finished', 'color': '#93C47D', 'from': new Date(2013, 10, 15, 18, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
                             {'id': '6fdfd775-7b22-42ec-a12c-21a64c9e7a9e', 'name': 'Shop is running', 'color': '#93C47D', 'from': new Date(2013, 10, 22, 12, 0, 0), 'to': new Date(2013, 10, 22, 12, 0, 0)},
                             {'id': 'c112ee80-82fc-49ba-b8de-f8efba41b5b4', 'name': 'Go-live', 'color': '#93C47D', 'from': new Date(2013, 10, 29, 16, 0, 0), 'to': new Date(2013, 10, 29, 16, 0, 0)}
@@ -108,8 +124,8 @@
                         	'id': 'b8d10927-cf50-48bd-a056-3554decab824', 
                         	'name': 'Status meetings', 
                         	'tasks': [
-                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 9, 25, 15, 0, 0), 'to': new Date(2013, 9, 25, 18, 30, 0)},
-                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 1, 15, 0, 0), 'to': new Date(2013, 10, 1, 18, 0, 0)},
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 9, 25, 15, 0, 0), 'to': new Date(2013, 9, 25, 18, 30, 0), progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 1, 15, 0, 0), 'to': new Date(2013, 10, 1, 18, 0, 0), progress: { progress: '15', color: colorForProgress('15') }},
                             {'id': '12af138c-ba21-4159-99b9-06d61b1299a2', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 8, 15, 0, 0), 'to': new Date(2013, 10, 8, 18, 0, 0)},
                             {'id': '73294eca-de4c-4f35-aa9b-ae25480967ba', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 15, 15, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
                             {'id': '75c3dc51-09c4-44fb-ac40-2f4548d0728e', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 24, 9, 0, 0), 'to': new Date(2013, 10, 24, 10, 0, 0)}
@@ -136,5 +152,18 @@
                             {'id': '75c3dc51-09c4-44fb-ac40-2f4548d0728e', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 24, 9, 0, 0), 'to': new Date(2013, 10, 24, 10, 0, 0)}
                         ]},
                     ]};
+                    
+                    function colorForProgress(progress)
+                    {
+	                    if(progress <= 50)
+	                    {
+		                    return '#C1272D'
+	                    }
+	                    else if(progress < 100)
+	                    {
+		                    return '#235C73'
+	                    }
+	                    return '#22B573'
+                    }
 			}]);
 })();
