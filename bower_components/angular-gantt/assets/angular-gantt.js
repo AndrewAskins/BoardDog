@@ -4079,4 +4079,3 @@ angular.module('ganttTemplates', []).run(['$templateCache', function($templateCa
         '');
 }]);
 
-//# sourceMappingURL=angular-gantt.js.map
