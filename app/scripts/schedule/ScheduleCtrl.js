@@ -9,7 +9,7 @@
 	'use strict';
 
 	angular.module('BoardDog')
-	  	   .controller('ScheduleCtrl', ['$scope', '$routeParams', '$firebase', "GANTT_EVENTS", function ($scope, $routeParams, $firebase, GANTT_EVENTS) {
+	  	   .controller('ScheduleCtrl', ['$scope', '$routeParams', '$firebase', "GANTT_EVENTS", 'moment', function ($scope, $routeParams, $firebase, GANTT_EVENTS, moment) {
 	  	//    		var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/surfuces');
 	  	//    		// create an AngularFire reference to the data
 			 //    var sync = $firebase(ref);
@@ -22,14 +22,19 @@
 				// 	company_name: null,
 				// 	phone_number: null,
 				// 	color: ''
-				// };
-				$scope.data = [];
 
-				$scope.$on(GANTT_EVENTS.READY, function() {
-		            $scope.data = loadData();
+				$scope.options = {};
+
+				$scope.$on(GANTT_EVENTS.READY, function(gantt_evt) {
+					var data = _getData();
+					gantt_evt.targetScope.removeAllData();
+					//gantt_evt.targetScope.data = data;
+					$scope.loadData(data);
+					// gantt_evt.currentScope.data = data;
+		            //$scope.data = loadData();
 		        });
 
-				function loadData() {
+				function _getData() {
 					return [
 						{
 							name: 'Milestones', 
@@ -47,17 +52,7 @@
 								    {name: 'Shop is running', color: '#93C47D', from: new Date(2013, 10, 22, 12, 0, 0), to: new Date(2013, 10, 22, 12, 0, 0)},
 								    {name: 'Go-live', color: '#93C47D', from: new Date(2013, 10, 29, 16, 0, 0), to: new Date(2013, 10, 29, 16, 0, 0)}
 								]
-						},
-						{
-							name: 'Status meetings', 
-							tasks: [
-							    {name: 'Demo', color: '#9FC5F8', from: new Date(2013, 9, 25, 15, 0, 0), to: new Date(2013, 9, 25, 18, 30, 0)},
-							    {name: 'Demo', color: '#9FC5F8', from: new Date(2013, 10, 1, 15, 0, 0), to: new Date(2013, 10, 1, 18, 0, 0)},
-							    {name: 'Demo', color: '#9FC5F8', from: new Date(2013, 10, 8, 15, 0, 0), to: new Date(2013, 10, 8, 18, 0, 0)},
-							    {name: 'Demo', color: '#9FC5F8', from: new Date(2013, 10, 15, 15, 0, 0), to: new Date(2013, 10, 15, 18, 0, 0)},
-							    {name: 'Demo', color: '#9FC5F8', from: new Date(2013, 10, 24, 9, 0, 0), to: new Date(2013, 10, 24, 10, 0, 0)}
-							]
-						}
+						}						
 					];
 				};
 			}]);

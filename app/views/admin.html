@@ -1,0 +1,182 @@
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <div class="col-sm-4">
+    <ul class="nav nav-pills nav-stacked" role="tablist">
+      <li role="presentation" class="active">
+        <a data-target="#clients" aria-controls="clients" role="tab" data-toggle="tab">Clients</a>
+      </li>
+      <li role="presentation">
+        <a data-target="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a>
+      </li>
+      <li role="presentation">
+        <a data-target="#surface" aria-controls="surface" role="tab" data-toggle="tab">Surface</a>
+      </li>
+      <li role="presentation">
+        <a data-target="#faces" aria-controls="faces" role="tab" data-toggle="tab">Faces</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="col-sm-8">
+    <div class="tab-content">
+      <!-- Clients -->
+      <div role="tabpanel" class="tab-pane active" id="clients">
+          <div class="row">
+            <form role="form">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" ng-model="client.name" placeholder="Name" />
+              </div>
+              <div class="form-group">
+                <label>Company Name</label>
+                <input class="form-control" type="text" ng-model="client.company_name" placeholder="Company" />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="text" ng-model="client.email" placeholder="Email" />
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input class="form-control" type="text" ng-model="client.phone_number" placeholder="Phone Number" />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" ng-model="client.address" placeholder="Address" />
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary pull-right" ng-click="addClient()">Add Client</button>
+              </div>
+            </form>
+          </div>
+
+            <div ng-repeat="client in clients" style="background: #e5e5e5; margin-top: 25px; padding: 0 15px;">
+              <div class="row" style="background: #666; padding: 15px 25px;">
+                <div class="col-sm-8">
+                  <span style="font-size: 2.5em; color: #fff;">{{client.name}}</span>
+                </div>
+                <div class="col-sm-4 text-right">
+                  <button class="btn btn-default" style="margin-top: 8px;">Edit</button>
+                  <button class="btn btn-default" style="margin-top: 8px;">Delete</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4" style="background: #f6f6f6; padding: 15px;">
+                  <span style="font-size: 1em;">Email</span><br />
+                  <span>{{client.email}}</span><br /><br />
+                  <span style="font-size: 1em;">Phone</span><br />
+                  <span>{{client.phone_number}}</span><br /><br />
+                  <span style="font-size: 1em;">Address</span><br />
+                  <span>{{client.address}}</span>
+                </div>
+                <div class="col-sm-8" style="padding: 15px;">
+                  stuff goes here
+                </div>
+              </div>
+            </div>
+      </div>
+
+      <!-- Tasks -->
+      <div role="tabpanel" class="tab-pane" id="task">
+        <div class="row"> 
+          <div class="col-sm-12">
+            <h2>Add Task</h2>
+            <form role="form">
+              <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="text" ng-model="task.description" placeholder="Company" />
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary pull-right" ng-click="addTask()">Add Task</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-sm-12">
+            <h2>Tasks</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Completed</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody ng-repeat="task in tasks">
+                <tr>
+                  <td><input type="checkbox" ng-model="task.completed" ng-change="tasks.$save(task)"></td>
+                  <td>{{task.description}}</td>
+                  <td style="text-align: center;">
+                    <span class="text-danger" ng-click="deleteTask(task)" alt="Remove Task" title="Remove Task">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clients -->
+      <div role="tabpanel" class="tab-pane" id="surface">
+        <div class="row"> 
+          <div class="col-sm-12">
+            <form role="form">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" ng-model="surface.name" placeholder="Name" />
+              </div>
+              <div class="form-group">
+                <label>Latitude</label>
+                <input class="form-control" type="text" ng-model="surface.location.latitude" placeholder="Name" />
+              </div>
+              <div class="form-group">
+                <label>Longitude</label>
+                <input class="form-control" type="text" ng-model="surface.location.longitude" placeholder="Name" />
+              </div>
+              <div class="form-group">
+                <label>Popularity</label>
+                <input class="form-control" type="text" ng-model="surface.popularity" placeholder="Company" />
+              </div>
+              <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" type="text" ng-model="surface.price" placeholder="Phone Number" />
+              </div>
+              <div class="form-group">
+                <label>Traffic</label>
+                <input class="form-control" type="text" ng-model="surface.traffic" placeholder="Phone Number" />
+              </div>
+              <div class="form-group">
+                <label>Type</label>
+                <input class="form-control" type="text" ng-model="surface.type" placeholder="Phone Number" />
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary pull-right" ng-click="addClient()">Add Client</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div class="col-sm-12" ng-repeat="surface in surfaces">
+            {{email}}</br >
+            {{name}}</br >
+            {{company_name}}</br >
+            {{phone_number}}</br >
+            {{phone_number}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Clients -->
+      <div role="tabpanel" class="tab-pane" id="faces">...</div>
+    </div>
+  </div>
+
+</div>
+
+
+<script type="javascript/text">
+  
+</script>

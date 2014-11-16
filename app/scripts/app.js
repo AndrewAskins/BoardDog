@@ -31,17 +31,9 @@
           templateUrl: 'views/schedule.html',
           controller: 'ScheduleCtrl'
         })
-        .when('/clients', {
-          templateUrl: 'views/clients.html',
-          controller: 'ClientCtrl'
-        })
-        .when('/tasks', {
-          templateUrl: 'views/tasks.html',
-          controller: 'TaskCtrl'
-        })
-        .when('/surfaces', {
-          templateUrl: 'views/surfaces.html',
-          controller: 'SurfaceCtrl'
+        .when('/admin', {
+          templateUrl: 'views/admin.html',
+          controller: 'AdminCtrl'
         })
         .otherwise({
           redirectTo: '/'
