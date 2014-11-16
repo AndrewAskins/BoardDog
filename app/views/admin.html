@@ -7,19 +7,36 @@
         <a data-target="#clients" aria-controls="clients" role="tab" data-toggle="tab">Clients</a>
       </li>
       <li role="presentation">
-        <a data-target="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a>
+        <a data-target="#campaigns" aria-controls="campaign" role="tab" data-toggle="tab">Campaigns</a>
       </li>
       <li role="presentation">
-        <a data-target="#surface" aria-controls="surface" role="tab" data-toggle="tab">Surface</a>
+        <a data-target="#surfaces" aria-controls="surfaces" role="tab" data-toggle="tab">Surfaces</a>
       </li>
       <li role="presentation">
-        <a data-target="#faces" aria-controls="faces" role="tab" data-toggle="tab">Faces</a>
+        <a data-target="#campaign-types" aria-controls="campaign-types" role="tab" data-toggle="tab">Campaign Types</a>
+      </li>
+      <li role="presentation">
+        <a data-target="#surface" aria-controls="surface" role="tab" data-toggle="tab">Add Surface</a>
       </li>
     </ul>
   </div>
 
   <!-- Tab panes -->
   <div class="col-sm-8">
+
+
+    <div class="row hide">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label>Search</label>
+          <input class="form-control" type="text" placeholder="search" />
+        </div>
+      </div>
+      <div class="col-sm-4 text-right">
+         <button class="btn btn-primary">Add Campaign type</button>
+      </div>
+    </div>
+    
     <div class="tab-content">
       <!-- Clients -->
       <div role="tabpanel" class="tab-pane active" id="clients">
@@ -51,108 +68,322 @@
             </form>
           </div>
 
-            <div ng-repeat="client in clients" style="background: #e5e5e5; margin-top: 25px; padding: 0 15px;">
-              <div class="row" style="background: #666; padding: 15px 25px;">
+            <div ng-repeat="client in clients" class="admin-cards">
+              <div class="row card-header">
                 <div class="col-sm-8">
-                  <span style="font-size: 2.5em; color: #fff;">{{client.name}}</span>
+                  <span>{{client.name}}</span>
                 </div>
                 <div class="col-sm-4 text-right">
-                  <button class="btn btn-default" style="margin-top: 8px;">Edit</button>
-                  <button class="btn btn-default" style="margin-top: 8px;" ng-click="deleteClient(client)">Delete</button>
+                  <button class="btn btn-default">Edit</button>
+                  <button class="btn btn-default" ng-click="deleteClient(client)">Delete</button>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-4" style="background: #f6f6f6; padding: 15px;">
-                  <span style="font-size: 1em;">Email</span><br />
+                <div class="col-sm-4 card-body-left">
+                  <span>Email</span><br />
                   <span>{{client.email}}</span><br /><br />
-                  <span style="font-size: 1em;">Phone</span><br />
+                  <span>Phone</span><br />
                   <span>{{client.phone_number}}</span><br /><br />
-                  <span style="font-size: 1em;">Address</span><br />
+                  <span>Address</span><br />
                   <span>{{client.address}}</span>
                 </div>
-                <div class="col-sm-8" style="padding: 15px;">
+                <div class="col-sm-8 card-body-right">
                   stuff goes here
                 </div>
               </div>
             </div>
       </div>
 
-      <!-- Tasks -->
-      <div role="tabpanel" class="tab-pane" id="task">
+      <!-- Campaigns -->
+      <div role="tabpanel" class="tab-pane" id="campaigns">
         <div class="row"> 
           <div class="col-sm-12">
-            <h2>Add Task</h2>
-            <form role="form">
+            <form role="form" class="form-horizontal">
               <div class="form-group">
-                <label>Description</label>
-                <input class="form-control" type="text" ng-model="task.description" placeholder="Task Description" />
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="campaign.name" placeholder="Name" />
+                </div>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary pull-right" ng-click="addTask()">Add Task</button>
+                <label class="col-sm-2 control-label">Start Date</label>
+                <div class="col-sm-10">
+                  <input class="form-control datepicker" type="text" ng-model="campaign.start_date" placeholder="Start Date" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">End Date</label>
+                <div class="col-sm-10">
+                  <input class="form-control datepicker" type="text" ng-model="campaign.end_date" placeholder="End Date" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Price</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="campaign.price" placeholder="Price" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Client</label>
+                <div class="col-sm-10">
+                  <select class="form-control" ng-model="campaign.client_id" ng-options="_client.name for _client in clients"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Campaign Type</label>
+                <div class="col-sm-10">
+                  <select class="form-control" ng-model="campaign.campaign_type" ng-options="_campaignType.name for _campaignType in campaignTypes"></select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Surface</label>
+                <div class="col-sm-10">
+                  <select class="form-control" ng-model="selectedSurface" ng-options="_surface.name for _surface in surfaces"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Face</label>
+                <div class="col-sm-10">
+                  <select class="form-control" ng-model="selectedFace" ng-options="_face.name for _face in selectedSurface.faces"></select>
+                </div>
+              </div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="_task in campaign.campaign_type.tasks">
+                  <tr>
+                    <td>{{_task.description}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="form-group">
+                <button class="btn btn-primary btn-block" ng-click="addCampaign()">Add Campaign</button>
               </div>
             </form>
-          </div>
-
-          <div class="col-sm-12">
-            <h2>Tasks</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Completed</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody ng-repeat="task in tasks">
-                <tr>
-                  <td><input type="checkbox" ng-model="task.completed" ng-change="tasks.$save(task)"></td>
-                  <td>{{task.description}}</td>
-                  <td style="text-align: center;">
-                    <span class="text-danger" ng-click="deleteTask(task)" alt="Remove Task" title="Remove Task">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
 
-      <!-- Clients -->
+      <!-- Surfaces -->
+      <div role="tabpanel" class="tab-pane" id="surfaces">
+         <div class="row"> 
+          <div class="col-sm-12">
+
+            <div class="admin-cards" ng-repeat="_surface in surfaces">
+              <div class="row card-header">
+                <div class="col-sm-8">
+                  <span>{{_surface.name}}</span>
+                </div>
+                <div class="col-sm-4 text-right">
+                  <button class="btn btn-primary" ng-click="deleteSurface(_surface)">Delete</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 card-body">
+                  <span>{{_surface.name}}</span><br />
+                  <span>{{_surface.price}}</span><br />
+                  <span>{{_surface.latitude}}</span><br />
+                  <span>{{_surface.longitude}}</span><br />
+                  <span>{{_surface.traffic}}</span><br />
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Faces</th>
+                      </tr>
+                    </thead>
+                    <tbody ng-repeat="face in _surface.faces">
+                      <tr>
+                        <td>{{face.name}}</td>
+                        <td style="text-align: right;">
+                          <span ng-click="deleteFace(face)" alt="Remove Face" title="Remove Face">
+                            <span class="glyphicon glyphicon-remove"></span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasks -->
+      <div role="tabpanel" class="tab-pane" id="campaign-types">
+        <div class="row"> 
+          <div class="col-sm-12">
+
+            <div class="admin-cards">
+              <div class="row card-header">
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" placeholder="Campaign Type Name" ng-model="campaignType.name" />
+                </div>
+                <div class="col-sm-4 text-right">
+                  <button class="btn btn-success" ng-click="addCampaignType()">Save</button>
+                  <button class="btn btn-default">Delete</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Task</th>
+                      </tr>
+                    </thead>
+                    <tbody ng-repeat="task in campaignType.tasks">
+                      <tr>
+                        <td>
+                          <input type="text" class="form-control" placeholder="Your Task Needs a Description" ng-model="task.description" />
+                        </td>
+                        <td style="text-align: right;">
+                          <span ng-click="deleteTask(task)" alt="Remove Task" title="Remove Task">
+                            <span class="glyphicon glyphicon-remove"></span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <form role="form">
+                    <div class="form-group">
+                      <button class="btn btn-primary pull-right" ng-click="addTask()">Add Task</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div class="col-sm-12">
+
+            <div class="admin-cards" ng-repeat="campaignType in campaignTypes">
+              <div class="row card-header">
+                <div class="col-sm-8">
+                  <span>{{campaignType.name}}</span>
+                </div>
+                <div class="col-sm-4 text-right">
+                  <button class="btn btn-default" ng-click="deleteCampaignType(campaignType)">Delete</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Task</th>
+                      </tr>
+                    </thead>
+                    <tbody ng-repeat="task in campaignType.tasks">
+                      <tr>
+                        <td>{{task.description}}</td>
+                        <td style="text-align: center;">
+                          <span ng-click="deleteTask(task)" alt="Remove Task" title="Remove Task">
+                            <span class="glyphicon glyphicon-remove"></span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Surface -->
       <div role="tabpanel" class="tab-pane" id="surface">
         <div class="row"> 
           <div class="col-sm-12">
-            <form role="form">
+            <form role="form" class="form-horizontal">
               <div class="form-group">
-                <label>Name</label>
-                <input class="form-control" type="text" ng-model="surface.name" placeholder="Name" />
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.name" placeholder="Name" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Latitude</label>
-                <input class="form-control" type="text" ng-model="surface.location.latitude" placeholder="Name" />
+                <label class="col-sm-2 control-label">Latitude</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.latitude" placeholder="latitude" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Longitude</label>
-                <input class="form-control" type="text" ng-model="surface.location.longitude" placeholder="Name" />
+                <label class="col-sm-2 control-label">Longitude</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.longitude" placeholder="longitude" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Popularity</label>
-                <input class="form-control" type="text" ng-model="surface.popularity" placeholder="Company" />
+                <label class="col-sm-2 control-label">Popularity</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.popularity" placeholder="popularity" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Price</label>
-                <input class="form-control" type="text" ng-model="surface.price" placeholder="Phone Number" />
+                <label class="col-sm-2 control-label">Price</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.price" placeholder="price" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Traffic</label>
-                <input class="form-control" type="text" ng-model="surface.traffic" placeholder="Phone Number" />
+                <label class="col-sm-2 control-label">Traffic</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.traffic" placeholder="traffic" />
+                </div>
               </div>
               <div class="form-group">
-                <label>Type</label>
-                <input class="form-control" type="text" ng-model="surface.type" placeholder="Phone Number" />
+                <label class="col-sm-2 control-label">Type</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" ng-model="surface.type" placeholder="type" />
+                </div>
               </div>
+
+             <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Faces</th>
+                    </tr>
+                     <tr>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody ng-repeat="surfaceFace in surface.faces">
+                    <tr>
+                      <td>
+                        {{surfaceFace.name}}
+                      </td>
+                      <td style="text-align: center;">
+                        <span ng-click="deleteFace(surfaceFace)" alt="Remove Face" title="Remove Face">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfooter>
+                    <tr>
+                      <td><input class="form-control" type="text" ng-model="faceName" placeholder="Face Name" /></td>
+                    </tr>
+                    <tr>
+                      <td><button class="btn btn-primary" ng-click="addFace()">Add Faces</button></td>
+                    </tr>
+                  </tfooter>
+                </table>
+
               <div class="form-group">
-                <button class="btn btn-primary pull-right" ng-click="addClient()">Add Client</button>
+                <button class="btn btn-primary btn-block" ng-click="addSurface()">Add Surface</button>
               </div>
             </form>
           </div>
@@ -168,9 +399,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Clients -->
-      <div role="tabpanel" class="tab-pane" id="faces">...</div>
     </div>
   </div>
 
