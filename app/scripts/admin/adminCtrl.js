@@ -10,6 +10,60 @@
 
 	angular.module('BoardDog')
 	  	   .controller('AdminCtrl', ['$scope', '$routeParams', '$firebase', function ($scope, $routeParams, $firebase) {
+	  	   		angular.element('.datepicker').pickadate();
+
+	  	   		var _models = {
+	  	   			client: {
+						id: Utils.uuid(),
+						name: '',
+						email: '',
+						company_name: '',
+						phone_number: '',
+						address: ''
+					},
+					campaign: {
+						id: Utils.uuid(),
+						start_date: null,
+						end_date: null,
+						status: null,
+						total: null,
+						client: null,
+						created_by: null, //user_id
+						created_date: null,
+						modified_by: null, //user_id
+						modified_date: null,
+						campaign_type: [] //campaignType object
+					},
+					campaignType: {
+						id: Utils.uuid(),
+						name: null,
+						tasks: [] //array of task objects
+					}, 
+					task: {
+						id: Utils.uuid(),
+						compeleted: null,
+						description: '',
+						permissions: null,
+						created_by: null, //client_id
+						due_date: null
+					},
+					surface: {
+				  	    id: Utils.uuid(),
+						name: '',
+						latitude: null,
+						longitude: null,
+						popularity: null,
+						price: null,
+						traffic: null,
+						type: null,
+						faces: [] //array of face objects
+				    },
+				    face: {
+				    	id: Utils.uuid(),
+				    	name: '',
+				    	campaigns: [] //array of tacampaignsk objects
+				    }
+	  	   		}
 	  	   		
 	  	   		//Clients
 	  	   		var ref_clients = new Firebase('https://fiery-heat-9377.firebaseio.com/clients');
@@ -17,14 +71,7 @@
 			    var sync_clients = $firebase(ref_clients);
 			    // download the data into a local object
 			    $scope.clients = sync_clients.$asArray();
-				$scope.client = {
-					id: Utils.uuid(),
-					name: null,
-					email: null,
-					company_name: null,
-					phone_number: null,
-					address: null
-				};
+			    $scope.client = _models.client;
 
 				//loading in progress!
 				$scope.$watch('clients', function(newValue) {
@@ -41,23 +88,13 @@
 					}
 				};
 
+				//Campains
 				var ref_campaigns = new Firebase('https://fiery-heat-9377.firebaseio.com/campaigns');
 	  	   		// create an AngularFire reference to the data
 			    var sync_campaigns = $firebase(ref_campaigns);
 			    // download the data into a local object
 			    $scope.campaigns = sync_campaigns.$asArray();
-				$scope.campaign = {
-					id: Utils.uuid(),
-					start_date: null,
-					end_date: null,
-					status: null,
-					total: null,
-					client_id: null,
-					created_by: null,
-					created_date: null,
-					modified_by: null,
-					modified_date: null
-				};
+			    $scope.campaign = angular.copy(_models.campaign);
 
 				//loading in progress!
 				$scope.$watch('campaigns', function(newValue) {
@@ -65,12 +102,44 @@
 				}, true);
 
 				$scope.addCampaign = function() {
-					$scope.campaigns.$add($scope.campaign);
+					var _campaign = angular.copy(_models.campaign);
+					$scope.campaigns.$add(_campaign);
+					var _face = $scope.selectedSurface.faces.filter(function(item) { return item.name === $scope.selectedFace.name });
+					if(_face != null) {
+						if(_face.campaigns == null) {
+							_face.campaigns = [_campaign];
+						} else {
+							_face.campaigns.push(_campaign);
+						}
+					}
 				};
 
 				$scope.deleteCampaign = function(campaign) {
 					if(campaign != null) {
 						$scope.campaigns.$remove(campaign);
+					}
+				};
+
+				//CampaignType
+				var ref_campaignType = new Firebase('https://fiery-heat-9377.firebaseio.com/campaignTypes');
+	  	   		// create an AngularFire reference to the data
+			    var sync_campaignType = $firebase(ref_campaignType);
+			    // download the data into a local object
+			    $scope.campaignTypes = sync_campaigns.$asArray();
+			    $scope.campaignType = _models.campaignType;
+
+				//loading in progress!
+				$scope.$watch('campaignTypes', function(newValue) {
+					//loading complete!
+				}, true);
+
+				$scope.addCampaignType = function() {
+					$scope.campaignTypes.$add($scope.campaignType);
+				};
+
+				$scope.deleteCampaignType = function(campaignType) {
+					if(campaignType != null) {
+						$scope.campaignTypes.$remove(campaignType);
 					}
 				};
 
@@ -80,11 +149,8 @@
 			    var sync_tasks = $firebase(ref_tasks);
 			    // download the data into a local object
 			    $scope.tasks = sync_tasks.$asArray();
-				$scope.task = {
-					id: Utils.uuid(),
-					compeleted: null,
-					description: null
-				};
+				$scope.task = _models.task;
+				$scope.taskDescription = null;
 
 				//loading in progress!
 				$scope.$watch('tasks', function(newValue) {
@@ -92,12 +158,16 @@
 				}, true);
 
 				$scope.addTask = function() {
-					$scope.tasks.$add($scope.task);
+					var _task = angular.copy(_models.task);
+					_task.description = $scope.taskDescription;
+					_task.id = Utils.uuid();
+					$scope.campaignType.tasks.push(_task);
+					//$scope.tasks.$add(_task);
 				};
 
 				$scope.deleteTask = function(task) {
 					if(task != null) {
-						$scope.tasks.$remove(task);
+						$scope.campaignType.tasks.pop(task);
 					}
 				};
 
@@ -108,18 +178,7 @@
 			    var sync_service = $firebase(ref_service);
 			    // download the data into a local object
 			    $scope.surfaces = sync_service.$asArray();
-			    $scope.surface = {
-			  	    id: Utils.uuid(),
-					name: null,
-					location: {
-						latitude: null,
-						longitude: null
-					},
-					popularity: null,
-					price: null,
-					traffic: null,
-					type: null
-			    };
+			    $scope.surface = _models.surface;
 			    
 			    //loading in progress!
 				$scope.$watch('surfaces', function(newValue) {
@@ -127,7 +186,7 @@
 				}, true);
 				
 				$scope.addSurface = function() {
-				    firebase($scope.surface);
+				    $scope.surfaces.$add($scope.surface);
 			    };
 
 				$scope.deleteSurface = function(surface) {
@@ -143,14 +202,8 @@
 			    var sync_faces = $firebase(ref_faces);
 			    // download the data into a local object
 			    $scope.faces = sync_faces.$asArray();
-				$scope.face = {
-					id: Utils.uuid(),
-					name: null,
-					email: null,
-					company_name: null,
-					phone_number: null,
-					color: ''
-				};
+				$scope.face = _models.face;
+				$scope.faceName = '';
 
 				//loading in progress!
 				$scope.$watch('faces', function(newValue) {
@@ -158,12 +211,16 @@
 				}, true);
 
 				$scope.addFace = function() {
-					$scope.faces.$add($scope.face);
+					var _face = angular.copy(_models.face);
+					_face.name = $scope.faceName;
+					_face.id = Utils.uuid();
+					$scope.surface.faces.push(_face);
+					//$scope.faces.$add($scope.face);
 				};
 
 				$scope.deleteFace = function(face) {
 					if(face != null) {
-						$scope.faces.$remove(face);
+						$scope.surface.faces.pop(face);
 					}
 				};
 			}]);
