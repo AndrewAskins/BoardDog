@@ -23,39 +23,39 @@
 					},
 					campaign: {
 						id: Utils.uuid(),
-						start_date: null,
-						end_date: null,
-						status: null,
-						total: null,
-						client: null,
-						created_by: null, //user_id
-						created_date: null,
-						modified_by: null, //user_id
-						modified_date: null,
+						start_date: '',
+						end_date: '',
+						status: '',
+						total: '',
+						client: '',
+						created_by: '', //user_id
+						created_date: '',
+						modified_by: '', //user_id
+						modified_date: '',
 						campaign_type: [] //campaignType object
 					},
 					campaignType: {
 						id: Utils.uuid(),
-						name: null,
+						name: '',
 						tasks: [] //array of task objects
 					}, 
 					task: {
 						id: Utils.uuid(),
-						compeleted: null,
+						compeleted: '',
 						description: '',
-						permissions: null,
-						created_by: null, //client_id
-						due_date: null
+						permissions: '',
+						created_by: '', //client_id
+						due_date: ''
 					},
 					surface: {
 				  	    id: Utils.uuid(),
 						name: '',
-						latitude: null,
-						longitude: null,
-						popularity: null,
-						price: null,
-						traffic: null,
-						type: null,
+						latitude: '',
+						longitude: '',
+						popularity: '',
+						price: '',
+						traffic: '',
+						type: '',
 						faces: [] //array of face objects
 				    },
 				    face: {
@@ -102,9 +102,12 @@
 				}, true);
 
 				$scope.addCampaign = function() {
-					var _campaign = angular.copy(_models.campaign);
+					var _campaign = angular.copy($scope.campaign);
 					$scope.campaigns.$add(_campaign);
-					var _face = $scope.selectedSurface.faces.filter(function(item) { return item.name === $scope.selectedFace.name });
+					var _face = []; 
+					$scope.surfaces.forEach(function(surface) {
+						_face = surface.faces.filter(function(item) { return item.name === $scope.selectedFace.name ? item : null });
+					});
 					if(_face != null) {
 						if(_face.campaigns == null) {
 							_face.campaigns = [_campaign];

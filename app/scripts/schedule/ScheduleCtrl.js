@@ -132,7 +132,7 @@
                         ]},
                         {
                         	'id': '2f85dbeb-0845-404e-934e-218bf39750c0', 
-                        	'name': 'Milestones', 
+                        	'name': 'Somethin', 
                         	'tasks': [
                             // Dates can be specified as string, timestamp or javascript date object. The data attribute can be used to attach a custom object
                             {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#93C47D', 'from': '2013-10-07T09:00:00', 'to': '2013-10-07T10:00:00'},

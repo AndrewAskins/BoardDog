@@ -2,6 +2,50 @@ body, html {
 	font-family: 'Lato', sans-serif;
 }
 
+.btn {
+	border-radius: 0;
+}
+
+.container-fluid {
+	margin-top: -25px;
+	padding: 0;
+}
+
+.main-view {
+	padding: 0 15px;
+	margin-right: 25px;
+}
+
+.header,
+.marketing,
+.footer {
+	margin-right: 0;
+	margin-left: 0;
+	padding: 15px 25px;
+}
+
+.header a,
+.header a:active {
+	color: #CCCCCC;
+	margin-top: 13px;
+}
+
+.header a {
+	text-transform: uppercase;
+}
+
+.header a:hover,
+.header a:focus,
+.nav > li > a:hover, .nav > li > a:focus {
+	color: #FFFFFF;
+	background-color: transparent;
+}
+
+.header a:hover,
+.header a:focus {
+	transition: color .5s linear;
+}
+
 .schedule-filter {
 	margin-bottom: 15px;
 }
