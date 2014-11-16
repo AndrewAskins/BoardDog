@@ -1,0 +1,15 @@
+body, html {
+	font-family: 'Lato', sans-serif;
+}
+
+.schedule-filter {
+	margin-bottom: 15px;
+}
+
+.schedule-filter label {
+	text-transform: uppercase;
+}
+
+.footer {
+	text-align: center;
+}

@@ -19,7 +19,7 @@
       'ngSanitize',
       'ngTouch',
       'gantt',
-      'firebase'
+      'firebase',
     ])
     .config(function ($routeProvider) {
       $routeProvider

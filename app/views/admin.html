@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-sm-4 text-right">
                   <button class="btn btn-default" style="margin-top: 8px;">Edit</button>
-                  <button class="btn btn-default" style="margin-top: 8px;">Delete</button>
+                  <button class="btn btn-default" style="margin-top: 8px;" ng-click="deleteClient(client)">Delete</button>
                 </div>
               </div>
               <div class="row">
@@ -85,7 +85,7 @@
             <form role="form">
               <div class="form-group">
                 <label>Description</label>
-                <input class="form-control" type="text" ng-model="task.description" placeholder="Company" />
+                <input class="form-control" type="text" ng-model="task.description" placeholder="Task Description" />
               </div>
               <div class="form-group">
                 <button class="btn btn-primary pull-right" ng-click="addTask()">Add Task</button>

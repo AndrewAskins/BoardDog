@@ -12,7 +12,9 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/site.css">
     <!-- endbuild -->
   </head>
   <body ng-app="BoardDog">
@@ -27,13 +29,14 @@
           <li><a ng-href="#/schedule">Schedule</a></li>
           <li><a ng-href="#/admin">Admin</a></li>
         </ul>
-        <h3 class="text-muted">Board Dog</h3>
+        <h3 class="text-muted"><img src="images/BoardDog_Logo.png" style="max-height: 60px;"/></h3>
       </div>
 
-      <div ng-view=""></div>
+      <div ng-view="" style="margin-bottom: 25px;"></div>
 
-      <div class="footer" style="display: none;">
-        <p><span class="glyphicon glyphicon-heart"></span> from the BoardDog team</p>
+      <div style="clear: both;"></div>
+      <div class="footer">
+        <p>Created in Columbia, SC with <span class="glyphicon glyphicon-heart"></span> from the BoardDog team.</p>
       </div>
     </div>
 
@@ -75,7 +78,6 @@
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
-
     <!-- endbower -->
     <!-- endbuild -->
 
