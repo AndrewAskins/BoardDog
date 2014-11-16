@@ -14,6 +14,9 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="scripts/third_party/pickadate.js-3.5.3/lib/themes/default.css">
+    <link rel="stylesheet" href="scripts/third_party/pickadate.js-3.5.3/lib/themes/default.date.css">
+    <link rel="stylesheet" href="scripts/third_party/selectize.js-master/dist/css/selectize.bootstrap3.css">
     <link rel="stylesheet" href="styles/site.css">
     <!-- endbuild -->
   </head>
@@ -83,7 +86,14 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+
+        <!-- Utils/ThirdParty -->
+        <script src="scripts/third_party/pickadate.js-3.5.3/lib/picker.js"></script>
+        <script src="scripts/third_party/pickadate.js-3.5.3/lib/picker.date.js"></script>
+        <script src="scripts/third_party/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
         <script src="scripts/utils/uuid.js"></script>
+
+        <!-- Controllers -->
         <script src="scripts/auth/authCtrl.js"></script>
         <script src="scripts/admin/adminCtrl.js"></script>
         <script src="scripts/schedule/scheduleCtrl.js"></script>
@@ -93,5 +103,6 @@
         <script src="scripts/surfaces/surfaceCtrl.js"></script>
         <script src="scripts/tasks/taskCtrl.js"></script>
         <!-- endbuild -->
+
 </body>
 </html>

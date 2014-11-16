@@ -23,6 +23,8 @@
 				// 	phone_number: null,
 				// 	color: ''
 
+				angular.element('.datepicker').pickadate();
+
 				$scope.options = {
 		            mode: 'custom',
 		            scale: 'day',
