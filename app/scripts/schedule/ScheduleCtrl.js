@@ -10,18 +10,74 @@
 
 	angular.module('BoardDog')
 	  	   .controller('ScheduleCtrl', ['$scope', '$routeParams', '$firebase', "GANTT_EVENTS", function ($scope, $routeParams, $firebase, GANTT_EVENTS) {
-		  	   	// var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/surfuces');
+		  	   	var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/surfaces');
 	  			// create an AngularFire reference to the data
-			 	//    var sync = $firebase(ref);
-			 	//    // download the data into a local object
-			 	//    $scope.clients = sync.$asArray();
-				// $scope.client = {
-				// 	id: Utils.uuid(),
-				// 	name: null,
-				// 	email: null,
-				// 	company_name: null,
-				// 	phone_number: null,
-				// 	color: ''
+			 	var sync = $firebase(ref);
+			 	// download the data into a local object
+			 	$scope.surfaces = sync.$asArray();
+				
+				$scope.data = {};
+				
+				//loading in progress!
+				$scope.$watch('surfaces', function(surfaces) {
+					if(surfaces != null)
+					{
+						//loading complete!
+						var data1 = [];
+						angular.forEach(surfaces, function(value, key, surface) {
+						    angular.forEach(value.faces, function(value, key, face) {
+							    var row = {
+								    id: value.id,
+								    name: value.name
+							    };
+							    
+							    row.tasks = [];
+							    
+							    angular.forEach(value.campaigns, function(value, key, campaign) {
+								    var block = {
+									    id: value.id,
+									    name: value.name+' $'+campaign.total,
+									    color: '#f8f8f8',
+									    from: value.start_date,
+									    to: value.end_date
+								    };
+								    
+								    var progress = 0;
+								    var total = 0;
+								    
+								    angular.forEach(value.campaign_type.tasks, function(value, key, task) {
+									    total++;
+									    if(value.completed)
+									    {
+										    progress++;
+									    }
+								    });
+								    
+								    progress = progress/total;
+								    var color = colorForProgress(progress);
+								    
+								    var progressObj = {
+									    progress: progress,
+									    color: color
+								    };
+								    
+								    block.progress = progressObj;
+								    
+								    row.tasks.push(block);
+							    });
+							    
+							    data1.push(row);
+						    });
+						    
+						});
+						
+						$scope.data.data1 = data1;
+						
+						
+					}
+					
+					
+				}, true);
 
 				$scope.myOptions = [
 				  {id: 1, title: 'Name', method: 'name'},
@@ -110,46 +166,78 @@
                     'data1': [
                         // Order is optional. If not specified it will be assigned automatically
                         {
-                        	'id': '2f85dbeb-0845-404e-934e-218bf39750c0', 
-                        	'name': 'Milestones',
+                        	'id': '0', 
+                        	'name': 'Gervais Street Board',
                         	'tasks': [
                             // Dates can be specified as string, timestamp or javascript date object. The data attribute can be used to attach a custom object
-                            {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#93C47D', 'from': '2013-10-07T09:00:00', 'to': '2013-10-07T10:00:00', progress: { progress: '75', color: colorForProgress('75') }},
-                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#93C47D', 'from': new Date(2013, 9, 18, 18, 0, 0), 'to': new Date(2013, 9, 20, 29, 0, 0), 'est': new Date(2013, 9, 16, 7, 0, 0), 'lct': new Date(2013, 9, 19, 0, 0, 0), progress: { progress: '40', color: colorForProgress('40') }},
-                            {'id': 'b6a1c25c-85ae-4991-8502-b2b5127bc47c', 'name': 'Development finished', 'color': '#93C47D', 'from': new Date(2013, 10, 15, 18, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
-                            {'id': '6fdfd775-7b22-42ec-a12c-21a64c9e7a9e', 'name': 'Shop is running', 'color': '#93C47D', 'from': new Date(2013, 10, 22, 12, 0, 0), 'to': new Date(2013, 10, 22, 12, 0, 0)},
-                            {'id': 'c112ee80-82fc-49ba-b8de-f8efba41b5b4', 'name': 'Go-live', 'color': '#93C47D', 'from': new Date(2013, 10, 29, 16, 0, 0), 'to': new Date(2013, 10, 29, 16, 0, 0)}
+                            {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#f8f8f8', 'from': '2013-10-07T09:00:00', 'to': '2013-10-015T10:00:00', progress: { progress: '75', color: colorForProgress('75') }},
+                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#f8f8f8', 'from': '2013-10-18T09:00:00', 'to': '2013-10-24T10:00:00', progress: { progress: '40', color: colorForProgress('40') }},
                         ]},
                         {
-                        	'id': 'b8d10927-cf50-48bd-a056-3554decab824', 
-                        	'name': 'Status meetings', 
+                        	'id': '1', 
+                        	'name': 'Huger St Board', 
                         	'tasks': [
-                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 9, 25, 15, 0, 0), 'to': new Date(2013, 9, 25, 18, 30, 0), progress: { progress: '100', color: colorForProgress('100') }},
-                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 1, 15, 0, 0), 'to': new Date(2013, 10, 1, 18, 0, 0), progress: { progress: '15', color: colorForProgress('15') }},
-                            {'id': '12af138c-ba21-4159-99b9-06d61b1299a2', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 8, 15, 0, 0), 'to': new Date(2013, 10, 8, 18, 0, 0)},
-                            {'id': '73294eca-de4c-4f35-aa9b-ae25480967ba', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 15, 15, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
-                            {'id': '75c3dc51-09c4-44fb-ac40-2f4548d0728e', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 24, 9, 0, 0), 'to': new Date(2013, 10, 24, 10, 0, 0)}
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-10-05T09:00:00', 'to': '2013-10-09T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-10T09:00:00', 'to': '2013-11-17T10:00:00', progress: { progress: '15', color: colorForProgress('15') }},
                         ]},
                         {
-                        	'id': '2f85dbeb-0845-404e-934e-218bf39750c0', 
-                        	'name': 'Milestones', 
+                        	'id': '2', 
+                        	'name': 'Miyos Board', 
                         	'tasks': [
                             // Dates can be specified as string, timestamp or javascript date object. The data attribute can be used to attach a custom object
-                            {'id': 'f55549b5-e449-4b0c-9f4b-8b33381f7d76', 'name': 'Kickoff', 'color': '#93C47D', 'from': '2013-10-07T09:00:00', 'to': '2013-10-07T10:00:00'},
-                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#93C47D', 'from': new Date(2013, 9, 18, 18, 0, 0), 'to': new Date(2013, 9, 18, 18, 0, 0), 'est': new Date(2013, 9, 16, 7, 0, 0), 'lct': new Date(2013, 9, 19, 0, 0, 0)},
-                            {'id': 'b6a1c25c-85ae-4991-8502-b2b5127bc47c', 'name': 'Development finished', 'color': '#93C47D', 'from': new Date(2013, 10, 15, 18, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
-                            {'id': '6fdfd775-7b22-42ec-a12c-21a64c9e7a9e', 'name': 'Shop is running', 'color': '#93C47D', 'from': new Date(2013, 10, 22, 12, 0, 0), 'to': new Date(2013, 10, 22, 12, 0, 0)},
-                            {'id': 'c112ee80-82fc-49ba-b8de-f8efba41b5b4', 'name': 'Go-live', 'color': '#93C47D', 'from': new Date(2013, 10, 29, 16, 0, 0), 'to': new Date(2013, 10, 29, 16, 0, 0)}
+                            {'id': '5e997eb3-4311-46b1-a1b4-7e8663ea8b0b', 'name': 'Concept approval', 'color': '#f8f8f8', 'from': '2013-10-28T09:00:00', 'to': '2013-11-15T10:00:00', progress: { progress: '80', color: colorForProgress('80') }},
                         ]},
                         {
-                        	'id': 'b8d10927-cf50-48bd-a056-3554decab824', 
-                        	'name': 'Status meetings', 
+                        	'id': '3', 
+                        	'name': 'Bad ass board', 
                         	'tasks': [
-                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 9, 25, 15, 0, 0), 'to': new Date(2013, 9, 25, 18, 30, 0)},
-                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 1, 15, 0, 0), 'to': new Date(2013, 10, 1, 18, 0, 0)},
-                            {'id': '12af138c-ba21-4159-99b9-06d61b1299a2', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 8, 15, 0, 0), 'to': new Date(2013, 10, 8, 18, 0, 0)},
-                            {'id': '73294eca-de4c-4f35-aa9b-ae25480967ba', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 15, 15, 0, 0), 'to': new Date(2013, 10, 15, 18, 0, 0)},
-                            {'id': '75c3dc51-09c4-44fb-ac40-2f4548d0728e', 'name': 'Demo', 'color': '#9FC5F8', 'from': new Date(2013, 10, 24, 9, 0, 0), 'to': new Date(2013, 10, 24, 10, 0, 0)}
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-10-06T09:00:00', 'to': '2013-10-13T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-17T09:00:00', 'to': '2013-11-27T10:00:00', progress: { progress: '40', color: colorForProgress('40') }},
+                        ]},
+                        {
+                        	'id': '4', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-00T09:00:00', 'to': '2013-11-07T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                        ]},
+                        {
+                        	'id': '5', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-10-06T09:00:00', 'to': '2013-10-13T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-17T09:00:00', 'to': '2013-11-27T10:00:00', progress: { progress: '40', color: colorForProgress('40') }},
+                        ]},
+                        {
+                        	'id': '6', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-00T09:00:00', 'to': '2013-11-07T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                        ]},
+                        {
+                        	'id': '7', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-10-06T09:00:00', 'to': '2013-10-13T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-17T09:00:00', 'to': '2013-11-27T10:00:00', progress: { progress: '40', color: colorForProgress('40') }},
+                        ]},
+                        {
+                        	'id': '8', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-00T09:00:00', 'to': '2013-11-07T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                        ]},
+                        {
+                        	'id': '9', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-10-06T09:00:00', 'to': '2013-10-13T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
+                            {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-17T09:00:00', 'to': '2013-11-27T10:00:00', progress: { progress: '40', color: colorForProgress('40') }},
+                        ]},
+                        {
+                        	'id': '10', 
+                        	'name': 'Bad ass board', 
+                        	'tasks': [
+                            {'id': '301d781f-1ef0-4c35-8398-478b641c0658', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-00T09:00:00', 'to': '2013-11-07T10:00:00', progress: { progress: '100', color: colorForProgress('100') }},
                         ]},
                     ]};
                     
