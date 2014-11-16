@@ -18,6 +18,7 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
+      'gantt',
       'firebase'
     ])
     .config(function ($routeProvider) {
@@ -26,12 +27,12 @@
           templateUrl: 'views/auth.html',
           controller: 'AuthCtrl'
         })
-        .when('/about', {
-          templateUrl: 'views/about.html',
-          controller: 'AboutCtrl'
+        .when('/schedule', {
+          templateUrl: 'views/schedule.html',
+          controller: 'ScheduleCtrl'
         })
-        .when('/addClient', {
-          templateUrl: 'views/addClient.html',
+        .when('/clients', {
+          templateUrl: 'views/clients.html',
           controller: 'ClientCtrl'
         })
         .when('/tasks', {
