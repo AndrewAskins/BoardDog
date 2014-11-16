@@ -35,6 +35,14 @@
           templateUrl: 'views/clients.html',
           controller: 'ClientCtrl'
         })
+        .when('/tasks', {
+          templateUrl: 'views/tasks.html',
+          controller: 'TaskCtrl'
+        })
+        .when('/surfaces', {
+          templateUrl: 'views/surfaces.html',
+          controller: 'SurfaceCtrl'
+        })
         .otherwise({
           redirectTo: '/'
         });

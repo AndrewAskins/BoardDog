@@ -4078,4 +4078,3 @@ angular.module('ganttTemplates', []).run(['$templateCache', function($templateCa
         '</div>\n' +
         '');
 }]);
-
