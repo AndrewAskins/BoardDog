@@ -8,17 +8,21 @@
     <label>Sort By</label>
     <div selectize="config" options='myOptions' ng-model="options.mode"></div>
   </div>
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="col-sm-5">
+        <label>Date Range</label>
+        <input class="form-control datepicker" type="text" ng-model="options.fromDate" />
+      </div>
+      <div class="col-sm-2 text-center">
+        <label style="margin-top: 33px;">TO</label>
+      </div>
+      <div class="col-sm-5">
+        <input class="form-control datepicker" style="margin-top: 25px;" type="text" ng-model="options.toDate" />
+      </div>
+    </div>
+  </div>
   <div class="col-sm-2">
-    <label>Date Range</label>
-    <input class="form-control datepicker" type="text" ng-model="options.fromDate" />
-  </div>
-  <div class="col-sm-1 text-center">
-    <label style="margin-top: 33px;">TO</label>
-  </div>
-  <div class="col-sm-2">
-    <input class="form-control datepicker" style="margin-top: 25px;" type="text" ng-model="options.toDate" />
-  </div>
-  <div class="col-sm-1">
     <button class="btn btn-primary" style="margin-top: 25px;">Add Campaign</button>
   </div>
 </div>

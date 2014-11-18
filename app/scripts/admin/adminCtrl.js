@@ -23,6 +23,8 @@
 					},
 					campaign: {
 						id: Utils.uuid(),
+						surface_id: '',
+						face_id: '',
 						start_date: '',
 						end_date: '',
 						status: '',
@@ -41,7 +43,7 @@
 					}, 
 					task: {
 						id: Utils.uuid(),
-						compeleted: '',
+						compeleted: false,
 						description: '',
 						permissions: '',
 						created_by: '', //client_id
@@ -60,6 +62,7 @@
 				    },
 				    face: {
 				    	id: Utils.uuid(),
+				    	surface_id: '',
 				    	name: '',
 				    	campaigns: [] //array of tacampaignsk objects
 				    }
@@ -79,7 +82,9 @@
 				}, true);
 
 				$scope.addClient = function() {
-					$scope.clients.$add($scope.client);
+					if($scope.client != null) {
+						$scope.clients.$add($scope.client);
+					}
 				};
 
 				$scope.deleteClient = function(client) {
@@ -103,18 +108,29 @@
 
 				$scope.addCampaign = function() {
 					var _campaign = angular.copy($scope.campaign);
-					$scope.campaigns.$add(_campaign);
-					var _face = []; 
-					$scope.surfaces.forEach(function(surface) {
-						_face = surface.faces.filter(function(item) { return item.name === $scope.selectedFace.name ? item : null });
-					});
-					if(_face != null) {
-						if(_face.campaigns == null) {
-							_face.campaigns = [_campaign];
+										 
+					var _surface = $scope.surfaces.$getRecord($scope.selectedSurface.$id);
+					var _face = _surface.faces.filter(function(item) { return item.id === $scope.selectedFace.id });
+					// $scope.surfaces.forEach(function(surface) {
+					// 	var f = surface.faces.filter(function(item) { return item.id === $scope.selectedFace.id });
+					// 	_face = _face.concat(f);
+					// });
+					if(_face.length > 0 && _surface != null) {
+						_campaign.surface_id = _surface.id;
+						_campaign.face_id = _face[0].id;
+
+						if(_face[0].campaigns == null) {
+							_face[0].campaigns = [_campaign];
 						} else {
-							_face.campaigns.push(_campaign);
+							_face[0].campaigns.push(_campaign);
 						}
+
+						$scope.surfaces.$save($scope.selectedSurface.$id).then(function(result) {
+							//record saved!!!
+						});
 					}
+
+					$scope.campaigns.$add(_campaign);
 				};
 
 				$scope.deleteCampaign = function(campaign) {
@@ -128,7 +144,7 @@
 	  	   		// create an AngularFire reference to the data
 			    var sync_campaignType = $firebase(ref_campaignType);
 			    // download the data into a local object
-			    $scope.campaignTypes = sync_campaigns.$asArray();
+			    $scope.campaignTypes = sync_campaignType.$asArray();
 			    $scope.campaignType = _models.campaignType;
 
 				//loading in progress!
@@ -174,7 +190,6 @@
 					}
 				};
 
-
 				//surface 
 				var ref_service = new Firebase('https://fiery-heat-9377.firebaseio.com/surfaces');
 	  	   		// create an AngularFire reference to the data
@@ -189,12 +204,17 @@
 				}, true);
 				
 				$scope.addSurface = function() {
+					$scope.surface.id = Utils.uuid();
+					$scope.surface.faces.forEach(function(_face) { 
+						_face.surface_id = $scope.surface.id; 
+						$scope.faces.$add(_face);
+					});
 				    $scope.surfaces.$add($scope.surface);
 			    };
 
 				$scope.deleteSurface = function(surface) {
 					if(surface != null) {
-						$scope.surface.$remove(surface);
+						$scope.surfaces.$remove(surface);
 					}
 				};
 
@@ -217,13 +237,14 @@
 					var _face = angular.copy(_models.face);
 					_face.name = $scope.faceName;
 					_face.id = Utils.uuid();
+					_face.campaigns = [];
 					$scope.surface.faces.push(_face);
-					//$scope.faces.$add($scope.face);
 				};
 
 				$scope.deleteFace = function(face) {
 					if(face != null) {
 						$scope.surface.faces.pop(face);
+						$scope.faces.$remove(face);
 					}
 				};
 			}]);

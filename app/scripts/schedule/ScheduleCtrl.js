@@ -11,73 +11,89 @@
 	angular.module('BoardDog')
 	  	   .controller('ScheduleCtrl', ['$scope', '$routeParams', '$firebase', "GANTT_EVENTS", function ($scope, $routeParams, $firebase, GANTT_EVENTS) {
 		  	   	var ref = new Firebase('https://fiery-heat-9377.firebaseio.com/surfaces');
-	  			// create an AngularFire reference to the data
-			 	var sync = $firebase(ref);
-			 	// download the data into a local object
+		  	   	var ref_campaigns = new Firebase('https://fiery-heat-9377.firebaseio.com/campaigns');
+
+		  	   	var sync = $firebase(ref);
+		  	   	var sync_campaigns = $firebase(ref_campaigns);
+
 			 	$scope.surfaces = sync.$asArray();
-				
-				$scope.data = {};
-				
-				//loading in progress!
-				$scope.$watch('surfaces', function(surfaces) {
-					if(surfaces != null)
-					{
-						//loading complete!
-						var data1 = [];
-						angular.forEach(surfaces, function(value, key, surface) {
-						    angular.forEach(value.faces, function(value, key, face) {
-							    var row = {
+			    $scope.campaigns = sync_campaigns.$asArray();
+				$scope.data = {
+					data1: []
+				};
+
+				$scope.surfaces.$loaded().then(function() {
+					if($scope.surfaces.length > 0 && $scope.campaigns.length > 0) {
+						$scope.buildData();
+					}
+				});
+				$scope.campaigns.$loaded().then(function() {
+					if($scope.campaigns.length > 0 && $scope.surfaces.length > 0) {
+						$scope.buildData();
+					}
+				});
+					
+				$scope.buildData = function() {
+					//loading complete!
+					var data1 = [];
+					angular.forEach($scope.surfaces, function(value, key, surface) {
+						var _surface = value;
+
+					    angular.forEach(value.faces, function(value, key, face) {
+						    var row = {
+							    id: value.id,
+							    name: value.name
+						    };
+						    
+						    row.tasks = [];
+						    var _campaign = [];
+						    angular.forEach($scope.campaigns, function(value, key, campaign) {
+						    	var onFace = face.filter(function(o) { return o.id === value.face_id });
+						    	if(onFace.length > 0 && value.surface_id === _surface.id) {
+						    		_campaign.push(value);
+						    	}
+						    });
+
+						    angular.forEach(_campaign, function(value, key, campaign) {
+							    var block = {
 								    id: value.id,
-								    name: value.name
+								    name: value.name +' $'+ _surface.price,
+								    color: '#f8f8f8',
+								    from: moment(value.start_date),
+								    to: moment(value.end_date)
 							    };
 							    
-							    row.tasks = [];
+							    var progress = 0;
+							    var total = 0;
 							    
-							    angular.forEach(value.campaigns, function(value, key, campaign) {
-								    var block = {
-									    id: value.id,
-									    name: value.name+' $'+campaign.total,
-									    color: '#f8f8f8',
-									    from: value.start_date,
-									    to: value.end_date
-								    };
-								    
-								    var progress = 0;
-								    var total = 0;
-								    
-								    angular.forEach(value.campaign_type.tasks, function(value, key, task) {
-									    total++;
-									    if(value.completed)
-									    {
-										    progress++;
-									    }
-								    });
-								    
-								    progress = progress/total;
-								    var color = colorForProgress(progress);
-								    
-								    var progressObj = {
-									    progress: progress,
-									    color: color
-								    };
-								    
-								    block.progress = progressObj;
-								    
-								    row.tasks.push(block);
+							    angular.forEach(value.campaign_type.tasks, function(value, key, task) {
+								    total++;
+								    if(value.completed)
+								    {
+									    progress++;
+								    }
 							    });
 							    
-							    data1.push(row);
+							    progress = progress/total;
+							    var color = colorForProgress(progress);
+							    
+							    var progressObj = {
+								    progress: progress,
+								    color: color
+							    };
+							    
+							    block.progress = progressObj;
+							    
+							    row.tasks.push(block);
 						    });
 						    
-						});
-						
-						$scope.data.data1 = data1;
-						
-						
-					}
+						    data1.push(row);
+					    });
+					    
+					});
 					
-					
-				}, true);
+					$scope.loadData(data1);
+				};
 
 				$scope.myOptions = [
 				  {id: 1, title: 'Name', method: 'name'},
@@ -145,15 +161,15 @@
 				{ 
 					// Start using the Gantt e.g. load data
 					$scope.loadTimespans($scope.ganttTimespan.timespan1);
-					$scope.loadData($scope.ganttData.data1);
+					$scope.loadData($scope.data.data1);
 				});
 				
 				$scope.ganttTimespan = {
                     'timespan1': [
                         {
                             id: '1',
-                            from: new Date(2013, 9, 21, 8, 0, 0),
-                            to: new Date(2013, 9, 25, 15, 0, 0),
+                            from: moment([2014, 9, 1]).month(1).format("YYYY-MM-DD"),//new Date(2013, 9, 21, 8, 0, 0),
+                            to: moment().endOf("month"), //new Date(2013, 9, 25, 15, 0, 0),
                             name: 'Sprint 1 Timespan'
                             //priority: undefined,
                             //classes: [], //Set custom classes names to apply to the timespan.
@@ -181,8 +197,6 @@
                             {'id': '0fbf344a-cb43-4b20-8003-a789ba803ad8', 'name': 'Demo', 'color': '#f8f8f8', 'from': '2013-11-10T09:00:00', 'to': '2013-11-17T10:00:00', progress: { progress: '15', color: colorForProgress('15') }},
                         ]},
                         {
-                        	'id': '2f85dbeb-0845-404e-934e-218bf39750c0', 
-                        	'name': 'Somethin', 
                         	'id': '2', 
                         	'name': 'Miyos Board', 
                         	'tasks': [
