@@ -92,7 +92,9 @@
 					    
 					});
 					
-					$scope.loadData(data1);
+					if($scope.loadData != null) {
+						$scope.loadData(data1);
+					}
 				};
 
 				$scope.myOptions = [

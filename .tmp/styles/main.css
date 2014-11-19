@@ -8082,25 +8082,25 @@ button.close {
     display: none !important;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\000036}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\000039}}
 .gantt-labels {
   min-width: 250px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000313}}
 .gantt-task {
   height: 100%;
   border-radius: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000315}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000318}}
 .gantt-task-progress {
   top: 0;
   bottom: 2px;
   border-radius: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000321}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000324}}
 .gantt-task-progress-meter {
   top: 0;
   bottom: 2px;
@@ -8111,17 +8111,21 @@ button.close {
   position: relative;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000334}}
 .container-fluid {
   margin: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000335}}
-.header {
-  background: #3D4542;
+  overflow-x: hidden;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000339}}
+.header {
+  position: fixed;
+  background: #3D4542;
+  width: 100%;
+  z-index: 5;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000346}}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -8130,15 +8134,21 @@ button.close {
 }
 
 /* Space out content a bit */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000347}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000354}}
 body {
-  padding-top: 20px;
+  font-family: 'Lato', sans-serif;
   padding-bottom: 20px;
   font-weight: 300;
+  overflow-x: hidden;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000361}}
+.main-view {
+  padding-top: 108px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000366}}
 .header,
 .marketing,
 .footer {
@@ -8147,12 +8157,11 @@ body {
 }
 
 /* Custom page header */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000374}}
 .header {
-  border-bottom: 1px solid #e5e5e5;
   /* Make the masthead heading the same height as the navigation */
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000377}}
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -8160,50 +8169,62 @@ body {
   padding-bottom: 19px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000385}}
+.schedule-filter {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000391}}
+.schedule-filter label {
+  text-transform: uppercase;
+}
+
 /* Custom page footer */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000376}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000397}}
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003103}}
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003108}}
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003112}}
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
 /* Supporting marketing content */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003119}}
 .marketing {
   margin: 40px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003101}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003122}}
 .marketing p + h4 {
   margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003129}}
   .container {
     max-width: 730px;
   }
 
   /* Remove the padding we set earlier */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003113}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003134}}
   .header,
   .marketing,
   .footer {
@@ -8211,15 +8232,147 @@ body {
     padding-right: 0;
   }
 
-  /* Space out the masthead */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003120}}
-  .header {
-    margin-bottom: 30px;
-  }
-
   /* Remove the bottom border on the jumbotron for visual effect */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003124}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003141}}
   .jumbotron {
     border-bottom: 0;
   }
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003146}}
+.admin-tabs {
+  margin: 0;
+  padding: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003152}}
+.admin-tabs .tab-btn-section {
+  margin: 0;
+  padding: 0;
+  background-color: #E8EBEB;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003158}}
+.admin-tabs .tab-btn-section > ul {
+  position: fixed;
+  width: 100%;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003163}}
+.admin-tabs .nav-pills > li:hover {
+  cursor: pointer;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003167}}
+.admin-tabs .nav-pills > li > a {
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  color: #3D4542;
+  transition: background-color .2 linear;
+  cursor: pointer;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003178}}
+.admin-tabs .nav-pills > li > a:hover,
+.admin-tabs .nav-pills > li > a:focus {
+  color: #3D4542;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003183}}
+.admin-tabs .nav-pills > li.active > a,
+.admin-tabs .nav-pills > li.active > a:hover,
+.admin-tabs .nav-pills > li.active > a:focus {
+  color: #3D4542;
+  background-color: #D7DADA;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003190}}
+.admin-tabs .tab-panel-section {
+  margin: 0;
+  min-height: 100vh;
+  padding-top: 100px;
+  box-shadow: inset 0px 0px 10px #333;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003197}}
+.admin-tabs .admin-search-add-row {
+  margin: 0;
+  padding: 15px 25px;
+  background-color: #E8EBEB;
+  position: fixed;
+  top: 108px;
+  left: 25%;
+  right: 0;
+  z-index: 1;
+  box-shadow: inset 0px 2px 5px #333;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003209}}
+.admin-tabs .admin-search-add-row .btn {
+  margin-top: 25px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003217}}
+.admin-tabs:after {
+  content: '';
+  clear: both;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003222}}
+.tab-panel-section {
+  background-color: #B8B8B8;
+  padding: 30px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003228}}
+.admin-cards {
+  background-color: #EFEFEF;
+  margin-top: 25px;
+  padding: 0 15px;
+  border-top: 5px solid #235C73;
+  color: #3D4542;
+  box-shadow: 0px 3px 10px #666;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003238}}
+.admin-cards .card-header {
+  color: #3D4542;
+  font-weight: 500;
+  padding: 15px 25px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003244}}
+.admin-cards .card-body {
+  background-color: #f6f6f6;
+  border-top: 5px solid #E0E0E0;
+  padding: 15px;
+  max-width: 93%;
+  margin: 0px auto;
+  margin-bottom: 15px;
+  float: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003254}}
+.admin-cards .card-body-left {
+  background-color: #f6f6f6;
+  padding: 15px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003259}}
+.admin-cards .card-body-left span:nth-child(odd) {
+  font-size: 1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003263}}
+.admin-cards .card-body-right {
+  padding: 15px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003269}}
+.admin-cards .card-header span {
+  font-size: 2.5em;
+  color: #3D4542;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003274}}
+.admin-cards .card-header button {
+  margin-top: 8px;
+  min-width: 100px;
+  margin-left: 10px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/williamagee\/BoardDogClone\/app\/styles\/main\.scss}line{font-family:\00003281}}
+.card-hidden {
+  margin-top: -300px;
 }

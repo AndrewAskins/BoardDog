@@ -7,13 +7,7 @@ body, html {
 }
 
 .container-fluid {
-	margin-top: -25px;
 	padding: 0;
-}
-
-.main-view {
-	padding: 0 15px;
-	margin-right: 25px;
 }
 
 .header,
@@ -46,56 +40,8 @@ body, html {
 	transition: color .5s linear;
 }
 
-.schedule-filter {
-	margin-bottom: 15px;
-}
-
-.schedule-filter label {
-	text-transform: uppercase;
-}
-
-.admin-cards {
-	background: #e5e5e5; 
-	margin-top: 25px; 
-	padding: 0 15px;
-}
-
-.card-hidden {
-	margin-top: -300px;
-}
-
-.admin-cards .card-header {
-	background: #666; 
-	padding: 15px 25px;
-}
-
-.admin-cards .card-header span {
-	font-size: 2.5em; 
-	color: #fff;
-}
-
-.admin-cards .card-header button {
-	margin-top: 8px;
-}
-
-.admin-cards .card-body {
-	background: #f6f6f6; 
-	padding: 15px;
-}
-
-.admin-cards .card-body-left {
-	background: #f6f6f6; 
-	padding: 15px;
-}
-
-.admin-cards .card-body-left span:nth-child(odd) {
-	font-size: 1em;
-}
 
 
-.admin-cards .card-body-right {
-	padding: 15px;
-}
 
 .footer {
 	text-align: center;

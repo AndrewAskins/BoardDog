@@ -3,6 +3,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+$black : #3D4542;
+$blue  : #235C73;
+
 .gantt-labels {
 	min-width:250px;
 }
@@ -30,10 +33,14 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 .container-fluid {
 	margin: 0;
+  overflow-x: hidden;
 }
 
 .header {
+  position: fixed;
 	background: #3D4542;
+  width: 100%;
+  z-index: 5;
 }
 
 .browsehappy {
@@ -45,10 +52,14 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  font-family: 'Lato', sans-serif;
   padding-bottom: 20px;
-  
   font-weight: 300;
+  overflow-x: hidden; 
+}
+
+.main-view {
+  padding-top: 108px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -61,7 +72,6 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
 
   /* Make the masthead heading the same height as the navigation */
   h3 {
@@ -71,6 +81,17 @@ body {
     padding-bottom: 19px;
   }
 }
+
+.schedule-filter {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+.schedule-filter label {
+  text-transform: uppercase;
+}
+
 
 /* Custom page footer */
 .footer {
@@ -116,12 +137,147 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.admin-tabs {
+  margin: 0;
+  padding: 0; 
+}
+
+.admin-tabs {
+  .tab-btn-section {
+    margin: 0;
+    padding: 0;
+    background-color: #E8EBEB;
+  }
+
+  .tab-btn-section > ul {
+    position: fixed;
+    width: 100%;
+  }
+
+  .nav-pills > li:hover {
+    cursor: pointer;
+  }
+
+  .nav-pills > li > a {
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: #3D4542;
+    transition: background-color .2 linear;
+    cursor: pointer;
+  }
+
+  .nav-pills > li > a:hover, 
+  .nav-pills > li > a:focus {
+    color: #3D4542;
+  }
+
+  .nav-pills > li.active > a, 
+  .nav-pills > li.active > a:hover, 
+  .nav-pills > li.active > a:focus {
+    color: #3D4542;
+    background-color: #D7DADA;
+  }
+
+  .tab-panel-section {
+    margin: 0;
+    min-height: 100vh;
+    padding-top: 100px;
+    box-shadow: inset 0px 0px 10px #333;
+  }
+
+  .admin-search-add-row {
+    margin: 0;
+    padding: 15px 25px;
+    background-color: #E8EBEB;
+    position: fixed;
+    top: 108px;
+    left: 25%;
+    right: 0;
+    z-index: 1;
+    box-shadow: inset 0px 2px 5px #333;
+  }
+
+  .admin-search-add-row .btn {
+    margin-top: 25px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+}
+
+.admin-tabs:after {
+  content: '';
+  clear: both;
+}
+
+.tab-panel-section {
+  background-color: #B8B8B8;
+  padding: 30px;
+}
+
+// Admin Cards
+.admin-cards {
+  background-color: #EFEFEF; 
+  margin-top: 25px; 
+  padding: 0 15px;
+  border-top: 5px solid #235C73;
+  color: $black;
+  box-shadow: 0px 3px 10px #666;
+}
+
+.admin-cards {
+  .card-header {
+    color: $black;
+    font-weight: 500;
+    padding: 15px 25px;
+  }
+  
+  .card-body {
+    background-color: #f6f6f6; 
+    border-top: 5px solid #E0E0E0;
+    padding: 15px;
+    max-width: 93%;
+    margin: 0px auto;
+    margin-bottom: 15px;
+    float: none;
+  }
+
+  .card-body-left {
+    background-color: #f6f6f6; 
+    padding: 15px;
+  }
+
+  .card-body-left span:nth-child(odd) {
+    font-size: 1em;
+  }
+
+  .card-body-right {
+    padding: 15px;
+  }
+}
+
+.admin-cards .card-header {
+  span {
+    font-size: 2.5em; 
+    color: $black;
+  }
+
+  button {
+    margin-top: 8px;
+    min-width: 100px;
+    margin-left: 10px;
+  }
+}
+
+.card-hidden {
+  margin-top: -300px;
 }
